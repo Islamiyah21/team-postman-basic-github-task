@@ -17,7 +17,17 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									"pm.environment.set(\"variable_key\", \"variable_value\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"variable_key\", \"variable_value\");"
 								],
 								"type": "text/javascript"
 							}
@@ -39,16 +49,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://demo.fusio-project.org/index.php/todo",
-							"protocol": "https",
+							"raw": "{{baseUrl}}todo",
 							"host": [
-								"demo",
-								"fusio-project",
-								"org"
-							],
-							"path": [
-								"index.php",
-								"todo"
+								"{{baseUrl}}todo"
 							],
 							"query": [
 								{
@@ -116,16 +119,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://demo.fusio-project.org/index.php/todo/?todo_id=2",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/?todo_id=2",
 							"host": [
-								"demo",
-								"fusio-project",
-								"org"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"index.php",
-								"todo",
 								""
 							],
 							"query": [
@@ -145,16 +143,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://demo.fusio-project.org/index.php/todo/?todo_id=2",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/?todo_id=2",
 							"host": [
-								"demo",
-								"fusio-project",
-								"org"
+								"{{baseUrl}}"
 							],
 							"path": [
-								"index.php",
-								"todo",
 								""
 							],
 							"query": [
@@ -179,7 +172,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -188,7 +180,7 @@
 									"// print any kind of variables/message on the screen\r",
 									"console.log(response[2].name);\r",
 									"pm.test(\"Search for a book name called Viscount Who Loved Me\", function (){\r",
-									"    pm.expect(response[3].name).to.eql(\"Viscount Who Loved Me\")\r",
+									"    pm.expect(response[2.name).to.eql(\"Viscount Who Loved Me\")\r",
 									"});\r",
 									"\r",
 									"/*const Fiction = response.filter((book) => book.type === \"fiction\");\r",
@@ -210,7 +202,8 @@
 									"\r",
 									"\r",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -218,20 +211,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://simple-books-api.glitch.me/books?type=fiction",
-							"protocol": "https",
+							"raw": "{{baseUrlBook}}books?2=2",
 							"host": [
-								"simple-books-api",
-								"glitch",
-								"me"
-							],
-							"path": [
-								"books"
+								"{{baseUrlBook}}books"
 							],
 							"query": [
 								{
-									"key": "type",
-									"value": "fiction"
+									"key": "2",
+									"value": "2"
 								}
 							]
 						}
@@ -244,7 +231,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -275,7 +261,8 @@
 									"\r",
 									"\r",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -283,19 +270,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://simple-books-api.glitch.me/books?type=romance",
-							"protocol": "https",
+							"raw": "{{baseUrl}}/books?2=romance",
 							"host": [
-								"simple-books-api",
-								"glitch",
-								"me"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"books"
 							],
 							"query": [
 								{
-									"key": "type",
+									"key": "2",
 									"value": "romance"
 								}
 							]
@@ -314,14 +298,14 @@
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
 								"exec": [
 									"const OrderId = pm.response.json();\r",
 									"\r",
 									"console.log(OrderId.orderId);\r",
 									"pm.globals.set(\"OrderId\", OrderId.orderId);\r",
 									""
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -340,7 +324,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"bookId\": 1,\n  \"customerName\": \"John\"\n}",
+							"raw": "{\n  \"bookId\":{{justmeID}}\n  \"customerName\": \"Islamiyah\"\n} ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,12 +332,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://simple-books-api.glitch.me/orders",
-							"protocol": "https",
+							"raw": "{{baseUrlBook}}/orders",
 							"host": [
-								"simple-books-api",
-								"glitch",
-								"me"
+								"{{baseUrlBook}}"
 							],
 							"path": [
 								"orders"
